@@ -1,2 +1,2 @@
-# udacity-drl-p1_navigation
+# udacity-drl-navigation
 Udacity Deep Reinforecement Learning Nanodegree project repo
