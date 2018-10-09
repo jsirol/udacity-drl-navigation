@@ -1,13 +1,13 @@
 """
-Implementation follows heavily that of presented in the Udacity Nanodegree
-'Deep Reinforcement Learning' (see: https://eu.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893)
+Base implementation adapted from the one provided in the Udacity 'Deep Reinforcement Learning' Nanodegree
+course materials (see: https://eu.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893)
 """
 
 import numpy as np
 import random
 from collections import namedtuple, deque
 
-from dql.model import DQN
+from dql.model import DQN, DuelingDQN
 
 import torch
 import torch.nn.functional as F
@@ -21,6 +21,7 @@ TAU = 1e-3              # for soft update of target parameters
 LR = 5e-4               # learning rate
 UPDATE_EVERY = 4        # how often to update the network
 
+
 class Agent:
     """
     Agent class utilizing Deep Q-Learning to interact with the environment.
@@ -31,9 +32,12 @@ class Agent:
         self.state_size = state_size
         self.action_size = action_size
         self.seed = random.seed(seed)
-        # Q-Network
-        self.dqn_local = DQN(state_size, action_size, seed).to(self.device)
-        self.dqn_target = DQN(state_size, action_size, seed).to(self.device)
+        # Q-Network using dueling network architecture.
+        self.dqn_local = DuelingDQN(state_size, action_size, seed).to(self.device)
+        self.dqn_target = DuelingDQN(state_size, action_size, seed).to(self.device)
+        # Standard MLP network architecture.
+        # self.dqn_local = DQN(state_size, action_size, seed).to(self.device)
+        # self.dqn_target = DQN(state_size, action_size, seed).to(self.device)
         self.optimizer = optim.Adam(self.dqn_local.parameters(), lr=LR)
 
         # Replay memory
@@ -87,10 +91,16 @@ class Agent:
         """
         states, actions, rewards, next_states, dones = experiences
 
-        # Get max predicted Q values (for next states) from target model
-        Q_targets_next = self.dqn_target(next_states).detach().max(1)[0].unsqueeze(1)
-        # Compute Q targets for current states
+        # Double DQN. Uses local network for action selection and target network for value estimation
+        # see: https://arxiv.org/pdf/1509.06461.pdf
+        Q_actions_next = self.dqn_local(next_states).detach().argmax(1).unsqueeze(1)
+        Q_targets_next = self.dqn_target(next_states).gather(1, Q_actions_next)
         Q_targets = rewards + (gamma * Q_targets_next * (1 - dones))
+        # Standard DQN
+        # Get max predicted Q values (for next states) from target model
+        # Q_targets_next = self.dqn_target(next_states).detach().max(1)[0].unsqueeze(1)
+        # Compute Q targets for current states
+        # Q_targets = rewards + (gamma * Q_targets_next * (1 - dones))
 
         # Get expected Q values from local model
         Q_expected = self.dqn_local(states).gather(1, actions)
@@ -113,8 +123,8 @@ class Agent:
 
         Params
         ======
-            :param local_model: (PyTorch model). weights will be copied from
-            :param target_model: (PyTorch model)-weights will be copied to
+            :param local_model: (PyTorch model) weights will be copied from
+            :param target_model: (PyTorch model) weights will be copied to
             :param tau: interpolation parameter
         """
         for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
