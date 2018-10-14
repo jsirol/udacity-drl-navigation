@@ -14,7 +14,7 @@ The task is episodic and considered solved when the agent gains a score of +13 o
 The agent receives a reward of `+1` for each collected yellow banana and a reward of `-1` for each collected blue banana.
 
 ## State space
-The state space has 37 dimensions that contain the agent's velocity and features that encode a ray-traced perception of objects the agent faces in the forward direction.
+The continuous state space has 37 dimensions that contain the agent's velocity and features that encode a ray-traced perception of objects the agent faces in the forward direction.
 
 ## Actions
 At each state, the agent has four discrete actions available:
