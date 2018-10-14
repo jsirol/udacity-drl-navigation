@@ -7,6 +7,7 @@ The task in this project was to train an agent to solve an environment where the
 
 The task is episodic and considered solved when the agent gains a score of +13 over 100 consecutive episodes. In the provided solution, the agent is trained for 1000 episodes and it gains an average reward of +15 at the end of training over 100 consecutive episodes.
 
+## Trained agent in action
 ![Trained agent](www/trained_dueling_dqn.gif)
 
 ## Rewards
@@ -27,7 +28,10 @@ At each state, the agent has four discrete actions available:
 
 
 # Getting started
-This code was developed and tested on Python 3.6.4 and PyTorch 0.4.1. The included environment executable is for Windows.
+This code was developed and tested on Python 3.6.4 and PyTorch 0.4.1. The included environment executable is for Windows. The links for Linux/Mac environments are provided below (provided by Udacity, might not work in the future).
+
+[Linux](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
+[MacOS](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
 
 ## Installing dependencies
 A working Python installation is required. An easy way is to install using [Anaconda](https://www.anaconda.com/download/). To install a specific Python version using Anaconda, see [link](http://docs.anaconda.com/anaconda/faq/#how-do-i-get-the-latest-anaconda-with-python-3-5).
