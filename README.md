@@ -7,7 +7,7 @@ The task in this project was to train an agent to solve an environment where the
 
 The task is episodic and considered solved when the agent gains a score of +13 over 100 consecutive episodes. In the provided solution, the agent is trained for 1000 episodes and it gains an average reward of +15 at the end of training over 100 consecutive episodes.
 
-[Trained agent](www/trained_dueling_dqn.gif)
+![Trained agent](www/trained_dueling_dqn.gif)
 
 ## Rewards
 The agent receives a reward of `+1` for each collected yellow banana and a reward of `-1` for each collected blue banana.
@@ -32,8 +32,8 @@ This code was developed and tested on Python 3.6.4 and PyTorch 0.4.1. The includ
 ## Installing dependencies
 A working Python installation is required. An easy way is to install using [Anaconda](https://www.anaconda.com/download/). To install a specific Python version using Anaconda, see [link](http://docs.anaconda.com/anaconda/faq/#how-do-i-get-the-latest-anaconda-with-python-3-5).
 
-Additionally, PyTorch needs to be installed by running (if you installed Python with Anaconda) `conda install pytorch -c pytorch
-pip3 install torchvision`. See [PyTorch website](https://pytorch.org/) for more instructions and details.
+Additionally, PyTorch needs to be installed by first running (if you installed Python with Anaconda) `conda install pytorch -c pytorch` and then
+`pip3 install torchvision` from the command line. See [PyTorch website](https://pytorch.org/) for more instructions and details.
 
 Finally, Unity ML-Agents version 0.4.0b needs to be installed from [here](https://github.com/Unity-Technologies/ml-agents/releases/tag/0.4.0b). To install, download the .zip archive and unzip, navigate to the `python` directory, and run `pip3 install .`. For additional help see the [installation guide](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md) (Note! the link is for new version of the ML-Agents where some of the syntax has changed from the version used in this project).
 
