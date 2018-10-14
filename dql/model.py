@@ -37,7 +37,7 @@ class DuelingDQN(nn.Module):
     """
     Implementation of dueling DQN architecture. See: https://arxiv.org/pdf/1511.06581.pdf
     """
-    def __init__(self, state_size, action_size, seed, fc1_units=64, fc2_units=64):
+    def __init__(self, state_size, action_size, seed, fc1_units=64, fc2_units=128):
         """
         Initialize parameters and build model.
         :param state_size: Dimension of the states
