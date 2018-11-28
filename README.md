@@ -1,5 +1,5 @@
 # udacity-drl-navigation
-Udacity Deep Reinforcement Learning Nanodegree project repo.
+Train an agent to collect and avoid objects using Deep Q-Learning.
 
 
 # Project details
